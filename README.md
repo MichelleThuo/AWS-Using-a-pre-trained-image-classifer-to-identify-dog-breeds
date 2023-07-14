@@ -1,1 +1,1 @@
-# AWS-Using-a-pre-trained-image-classifer-to-identify-dog-breeds
+This repository contains my first project with AWS Udacity AI Programming with Python nanodegree
