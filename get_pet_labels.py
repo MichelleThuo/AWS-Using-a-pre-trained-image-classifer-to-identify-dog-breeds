@@ -4,7 +4,7 @@
 #                                                                             
 # PROGRAMMER: Michelle Thuo
 # DATE CREATED: 10/07/2023                                 
-# REVISED DATE: 
+# REVISED DATE: 17/07/2023
 # PURPOSE: Create the function get_pet_labels that creates the pet labels from 
 #          the image's filename. This function inputs: 
 #           - The Image Folder as image_dir within get_pet_labels function and 
@@ -40,43 +40,49 @@ def get_pet_labels(image_dir):
       List. The list contains for following item:
          index 0 = pet image label (string)
     """
-    #Retrieve the filenames from folder pet_images/
-    pet_label_list = listdir(image_dir)
-    #Iterate through the list to convert to lower case letters
-    for filename in range(0, len(pet_label_list),1):
-        pet_label_list[filename] = pet_label_list[filename].lower()
-    #Iterate through the list to split lower case string by '_'
-    #create pet_name list
-    pet_name_list = []
-    for filename in pet_label_list:
-        split = filename.split("_")
-        #print(split)
-        pet_name = " "
-        for name in split:
-            if name.isalpha():
-                pet_name += name + " "
-        print(pet_name)
-        pet_name_list.append(pet_name.strip())
-     #Create empty dictionary named results_dic
+    
+    # Retrieve the filenames from folder specified as image_dir/
+    in_files = listdir(image_dir)
+    
+    # Print 10 of the filenames from folder specified as image_dir/
+    print("\nPrints 10 filenames from folder specified as image_dir")
+    for idx in range (0, min(10, len(in_files)), 1):
+        print("{:2d} file: {:>25}".format(idx + 1, in_files[idx]))
+    
+    # Create empty dictionary named results_dic
     results_dic = dict()
-    filename_list = listdir(image_dir)
-    #Determine number of item in dictionary
-    number_in_dict = len(results_dic)
-    #Add new key-value pairs to dictionary ONLY when key doesn't already exist. This dictionary's value is a list #that contains only one item - the pet image label
-   
-    for key in range(0, len(filename_list), 1):
-        if filename_list[key] not in results_dic:
-            label_list = []
-            label_list.append(pet_name_list[key])
-            results_dic[filename_list[key]] = label_list
+    
+    # Determine number of items in dictionary
+    items_in_dic = len(results_dic)
+    print("\nEmpty Dictionary results_dic - n items=", items_in_dic)
+          
+    # Add new key-value pairs to dictionary ONLY when key doesn't already exist. 
+    # This dictionary's value is a list that contains only 1 item - the pet image label
+    
+    for idx in range (0, len(in_files), 1):
+        # Skips file if starts with . (like .DS_Store of Mac OSX) because it 
+        # isn't an pet image file
+        if in_files[idx][0] != ".":
+            # Creates temporary label variable to hold pet label name extracted 
+            pet_label = ""
+            pet_image = in_files[idx]
+            low_pet_image = pet_image.lower()
+            word_list_pet_image = low_pet_image.split("_")
+            for word in word_list_pet_image:
+                if word.isalpha():
+                    pet_label += word + " "
+            pet_label = pet_label.strip()
+
+        if in_files[idx] not in results_dic:
+            results_dic[in_files[idx]] = [pet_label]
         else:
-            print("Warning: Key = ", filename_list[key], "already exists in results_dic with value = ", results_dic[filename_list[key]])
-            #Iterating through a dictionary printing all keys and their corresponding values
-    #print("\Printing all key_value pairs in dictionary results_dic:")
+            print("** Warning: Key=", in_files[idx], "already exists in results_dic with value =", results_dic[in_files[idx]])
+            
+    # Iterate through a dictionary printing all keys and their associated values
+    print("\nPrinting all key-value pairs in dictionary results_dic:")
     for key in results_dic:
-        print("Filename = ", key, "Pet Label = ", results_dic[key])
+        print("Filename=", key, "   Pet label=", results_dic[key][0])
         
-              
     # Replace None with the results_dic dictionary that you created with this
     # function
     return results_dic
