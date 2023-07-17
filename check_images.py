@@ -5,7 +5,7 @@
 # TODO 0: Add your information below for Programmer & Date Created.                                                                             
 # PROGRAMMER: Michelle Thuo
 # DATE CREATED: 10/07/2023                              
-# REVISED DATE: 
+# REVISED DATE: 17/07/2023
 # PURPOSE: Classifies pet images using a pretrained CNN model, compares these
 #          classifications to the true identity of the pets in the images, and
 #          summarizes how well the CNN performed on the image classification task. 
@@ -42,6 +42,18 @@ def main():
     # TODO 0: Measures total program runtime by collecting start time
     start_time = time()
     
+    #Set sleep time
+    sleep(0)
+    
+    #Set end time
+    end_time = time()
+    
+    #Compute overall runtime in seconds
+    tot_time = end_time - start_time
+    
+    #Print overall runtime in format hh:mm:ss
+    print("\nTotal Elapsed Runtime:", str(int((tot_time/3600)))+":"+str(int(((tot_time % 3600) / 60)))+":"+str(int(((tot_time % 3600) % 60))))
+
     # TODO 1: Define get_input_args function within the file get_input_args.py
     # This function retrieves 3 Command Line Arugments from user as input from
     # the user running the program from a terminal window. This function returns
@@ -119,7 +131,7 @@ def main():
     end_time = time()
     
     # TODO 0: Computes overall runtime in seconds & prints it in hh:mm:ss format
-    tot_time = end_time - start_time#calculate difference between end time and start time
+    tot_time = end_time - start_time
     print("\n** Total Elapsed Runtime:",
           str(int((tot_time/3600)))+":"+str(int((tot_time%3600)/60))+":"
           +str(int((tot_time%3600)%60)) )
